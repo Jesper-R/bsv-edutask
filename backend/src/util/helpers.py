@@ -2,7 +2,7 @@ from src.controllers.usercontroller import UserController
 from src.util.dao import DAO
 import random
 
-def hasAttribute(obj: dict | None , attribute: str):
+def hasAttribute(obj: dict, attribute: str):
     """Check whether a given dict contains a specific attribute
 
     parameters:
