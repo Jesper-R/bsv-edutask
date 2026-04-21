@@ -43,7 +43,7 @@ def test_get_user_by_email_one_user_returns_user(sut):
 def test_get_user_by_email_multiple_users_returns_first_and_warns(sut, capsys):
     # Arrange
     user1 = {'email': 'john@example.com', 'firstName': 'John', 'lastName': 'Doe'}
-    user2 = {'email': 'john2@example.com', 'firstName': 'John2', 'lastName': 'Doe2'}
+    user2 = {'email': 'john@example.com', 'firstName': 'John2', 'lastName': 'Doe2'}
     sut.dao.find.return_value = [user1, user2]
 
     # Act
