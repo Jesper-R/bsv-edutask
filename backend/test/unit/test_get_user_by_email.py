@@ -52,7 +52,7 @@ def test_get_user_by_email_multiple_users_returns_first_and_warns(sut, capsys):
 
     # Assert
     assert result == user1
-    assert "john@example.com" in captured.out
+    assert 'john@example.com' in captured.out
 
 @pytest.mark.unit
 def test_get_user_by_email_database_fails_raises_exception(sut):
