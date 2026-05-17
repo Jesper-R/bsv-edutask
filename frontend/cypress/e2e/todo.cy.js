@@ -56,13 +56,60 @@ describe('Req 8: Todo Management', () => {
   })
 
   describe('R8UC1: Adding Todo Items', () => {
+    it('Valid todo item is created', () => {
+      // Arrange
+      cy.get('.inline-form > [type="text"]').type('successful task please')
+      
+      // Act
+      cy.get('.inline-form').submit()
+
+      // Assert
+      cy.get('.todo-list > .todo-item').last().should('contain.text', 'successful task please')
+    })
     it('Empty description makes add button disabled', () => {
       // Arrange
       // Act
       // Assert
+      cy.get('.inline-form > [type="text"]').should('have.value', '')
+      cy.get('.inline-form > [type="submit"').should('be.disabled')
     })
-    it('Valid todo item is created', () => {
-      // s
+  })
+
+  describe('R8UC2: Toggling Todo Items', () => {
+    it('Toggle when previous state active', () => {
+      // Arrange
+      // Act
+      cy.get('.todo-list > .todo-item').first().find('.checker').click()
+
+      // Assert
+      cy.get('.todo-list > .todo-item').first().find('.checker').should('have.class', 'checked')
+      cy.get('.todo-list > .todo-item').first().find('.editable').should('have.css', 'text-decoration-line', 'line-through')
+    })
+
+    it('Toggle when previous state done', () => {
+      // Arrange
+      cy.get('.todo-list > .todo-item').first().find('.checker').click()
+
+      // Act
+      cy.get('.todo-list > .todo-item').first().find('.checker').click()
+
+      // Assert
+      cy.get('.todo-list > .todo-item').first().find('.checker').should('not.have.class', 'checked')
+      cy.get('.todo-list > .todo-item').first().find('.editable').should('not.have.css', 'text-decoration-line', 'line-through')
+    })
+  })
+
+  describe('R8UC3: Deleting Todo Items', () => {
+    it('Delete todo item', () => {
+      // Arrange
+      cy.get('.todo-list > .todo-item').first().find('.editable').invoke('text').then((itemText) => {
+
+      // Act
+      cy.get('.todo-list > .todo-item').first().find('.remover').click()
+
+      // Assert
+      cy.get('.popup-inner').should('not.contain.text', itemText)
+      })
     })
   })
 })
